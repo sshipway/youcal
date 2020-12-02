@@ -1,0 +1,12 @@
+#!/bin/sh
+# This script run at every start of the container
+
+# Pull in vars from -e
+source /etc/envvars
+
+sed -i -r -e "s;%\{YOUCAL_URL\};$YOUCAL_URL;" /etc/apache2/html/* /etc/youcal.conf
+sed -i -r -e "s;%\{YOUCAL_TOKEN\};$YOUCAL_TOKEN;" /etc/apache2/html/* /etc/youcal.conf
+
+# Maybe we mounted the config instead
+cp -pu /etc/youcal.conf /etc/youcal/youcal.conf
+
